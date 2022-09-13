@@ -1,0 +1,15 @@
+
+pipelines:
+  - name: demo_pipeline
+    steps:
+      - name: bld_image
+        type: DockerBuild
+        configuration:
+          dockerFileLocation: .
+          dockerFileName: Dockerfile
+          dockerImageName: inmarsat.jfrog.io/test-docker/docker-icinga2    # replace with your fully qualified Docker registry/image name
+          dockerImageTag: ${run_number}
+          inputResources:
+            - name: gosvc_app
+          integrations:
+            - name: MyArtifactory
